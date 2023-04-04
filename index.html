@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>
+            Fetching Current Bitcoin Price From API
+        </title>
+    </head>
+
+<body>
+
+<center><h1 class="title">Current Bitcoin Price:</h1>
+<div id="price" class="price"></div>
+<div class="currency">
+   <label for="USD">USD :</label>
+  <input type="text" id="USD"
+           name="u" ><br><br>
+  <label for="GBP">GBP :</label>
+  <input type="text" id="GBP"
+           name="g" ><br><br>
+  <label for="EUR">EUR :</label>
+  <input type="text" id="EUR"
+           name="eur"><br><br>
+</div>
+</center>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js">
+
+</script>
+<script>
+    $(document).ready(function()
+    {
+        $.ajax({
+            type: 'GET',
+            url:'https://api.coindesk.com/v1/bpi/currentprice.json',
+            dataType:'JSON',
+            success: function(data)
+            {
+                
+                //let a=JSON.parse(data);
+                //console.log($a);
+                $('#USD').val(data.bpi.USD.rate);
+                $('#GBP').val(data.bpi.GBP.rate);
+                $('#EUR').val(data.bpi.EUR.rate);
+                /*console.log(data);*/
+                
+            },
+            error: function(error)
+            {
+                console.log('Error 404');
+            }
+        })
+    })
+</script>
+
+</body>
